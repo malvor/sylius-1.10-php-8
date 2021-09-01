@@ -2,7 +2,10 @@ ARG PHP_VERSION=8.0
 ARG NODE_VERSION=10
 ARG NGINX_VERSION=1.16
 
-FROM php:${PHP_VERSION}-fpm-alpine3.13 AS sylius_php
+FROM php:${PHP_VERSION}-fpm-alpine3.13 AS php-base
+
+FROM php-base as php-dev
+WORKDIR /srv/sylius
 
 # persistent / runtime deps
 RUN apk add --no-cache \
@@ -57,6 +60,7 @@ RUN set -eux; \
 	apk add --no-cache --virtual .sylius-phpexts-rundeps $runDeps; \
 	\
 	apk del .build-deps
+FROM php-dev as sylius_php
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY docker/php/php.ini /usr/local/etc/php/php.ini
@@ -125,6 +129,7 @@ COPY package.json yarn.lock ./
 RUN set -eux; \
 	yarn install; \
 	yarn cache clean
+
 
 COPY --from=sylius_php /srv/sylius/vendor/sylius/sylius/src/Sylius/Bundle/UiBundle/Resources/private vendor/sylius/sylius/src/Sylius/Bundle/UiBundle/Resources/private/
 COPY --from=sylius_php /srv/sylius/vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/private vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/private/

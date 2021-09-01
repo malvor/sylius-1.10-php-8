@@ -76,6 +76,15 @@ services:
         depends_on:
             - mysql
         command: mysql:3306
+        
+    code:
+        build:
+            dockerfile: etc/artifact/Dockerfile
+            context: .
+            target: php-dev
+        volumes:
+            - ./:/srv/sylius:rw,delegated
+
 volumes:
     public-media:
     mysql-data:

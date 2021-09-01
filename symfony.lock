@@ -8,6 +8,12 @@
     "alcohol/iso4217": {
         "version": "4.0.0"
     },
+    "amphp/amp": {
+        "version": "v2.6.0"
+    },
+    "amphp/byte-stream": {
+        "version": "v1.8.1"
+    },
     "api-platform/core": {
         "version": "2.5",
         "recipe": {
@@ -55,6 +61,12 @@
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
+    "composer/semver": {
+        "version": "3.2.5"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.4.6"
+    },
     "container-interop/container-interop": {
         "version": "1.2.0"
     },
@@ -66,6 +78,9 @@
     },
     "dmore/chrome-mink-driver": {
         "version": "2.7.0"
+    },
+    "dnoegel/php-xdg-base-dir": {
+        "version": "v0.1.1"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -141,6 +156,12 @@
     },
     "fakerphp/faker": {
         "version": "v1.12.0"
+    },
+    "felixfbecker/advanced-json-rpc": {
+        "version": "v3.2.1"
+    },
+    "felixfbecker/language-server-protocol": {
+        "version": "1.5.1"
     },
     "fig/link-util": {
         "version": "1.1.1"
@@ -334,8 +355,14 @@
             "ref": "5ef2976310e8f9621c1a722a73bfbe115c1559a3"
         }
     },
+    "netresearch/jsonmapper": {
+        "version": "v3.1.1"
+    },
     "nette/neon": {
         "version": "v3.2.2"
+    },
+    "nikic/php-parser": {
+        "version": "v4.12.0"
     },
     "ocramius/package-versions": {
         "version": "1.3.0"
@@ -961,8 +988,17 @@
     "twig/twig": {
         "version": "v2.5.0"
     },
+    "vimeo/psalm": {
+        "version": "3.18.2"
+    },
     "webmozart/assert": {
         "version": "1.3.0"
+    },
+    "webmozart/glob": {
+        "version": "4.3.0"
+    },
+    "webmozart/path-util": {
+        "version": "2.3.0"
     },
     "willdurand/hateoas": {
         "version": "2.12.0"

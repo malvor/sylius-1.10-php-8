@@ -5,7 +5,7 @@ compose=docker-compose -f docker-compose.yml -f etc/$(env)/docker-compose.yml
 export compose env
 
 .PHONY: start
-start: erase build start-deps up db install
+start: erase build start-deps up db
 
 .PHONY: start-deps
 start-deps:
@@ -64,7 +64,6 @@ schema-validate: ## validate database schema
 .PHONY: install
 install:
 		$(compose) exec -T php sh -lc './bin/console sylius:install -n'
-		$(compose) exec -T php sh -lc './bin/console d:m:m -n'
 
 .PHONY: reinstall
 reinstall: db install
@@ -72,3 +71,15 @@ reinstall: db install
 .PHONY: sample
 sample:
 		$(compose) exec -T php sh -lc './bin/console sylius:install:sample-data'
+
+.PHONY: phpunit
+phpunit: db ## execute project unit tests
+		$(compose) exec -T php sh -lc "php -dpcov.enabled='1' -dpcov.directory=. -dpcov.exclude='~vendor~' ./vendor/bin/phpunit $(conf)"
+
+.PHONY: phpstan
+phpstan: ## executes php analizers
+		$(compose) run --rm code sh -lc './vendor/bin/phpstan analyse -l 6 -c phpstan.neon src tests'
+
+.PHONY: psalm
+psalm: ## execute psalm analyzer
+		$(compose) run --rm code sh -lc './vendor/bin/psalm --show-info=false'
