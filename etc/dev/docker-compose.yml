@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+    nginx:
+        ports:
+            - "8080:80"
+    php:
+        ports:
+            - "2323:22"
+#            - "9003:9003"
+        environment:
+            - COMPOSER_MEMORY_LIMIT=-1
+            - PHP_IDE_CONFIG=serverName=sylius.local
+    blackfire:
+        image: blackfire/blackfire
+        env_file:
+          - .env.blackfire
+        environment:
+            BLACKFIRE_LOG_LEVEL: 4
+
+    mysql:
+        ports:
+          - "3306:3306"
+    mailhog:
+        image: mailhog/mailhog:latest
+        environment:
+          - MH_STORAGE=maildir
+        ports:
+          - "8025:8025"
+    nodejs:
+        ports:
+            - "35729:35729"
+volumes:
+    mysql-data:
